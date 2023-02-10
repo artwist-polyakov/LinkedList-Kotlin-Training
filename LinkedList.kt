@@ -17,18 +17,13 @@ fun main() {
 
         fun add(value: T) {
             if (!isEmpty()) {
-                if (tail != null) { // если у массива уже есть хвост
-                    tail?.next = Element<T>(value = value, prev = tail) // ставим в next последнего элемента массива ссылку на новый член
-                    size++
-                    tail = tail?.next /* заменяем хвост нашего массива ссыкой на действительно последний элемент */
-                } else {
-                    size++
-                    tail = Element<T>(value = value, prev=head)
-                    head?.next  = tail
-                }
+                size++
+                tail = Element<T>(value = value, prev=tail)
+                tail?.prev?.next  = tail
             } else { // Добавление в пустой массив
                 size++
                 head = Element(value = value) //next и prev указывают на null
+                tail = head
             }
         }
 
